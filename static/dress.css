@@ -1,0 +1,174 @@
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* min-height: 100vh; */
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+    margin: 0;
+}
+
+
+/* Consistent header styles */
+header {
+    text-align: center;
+    background: linear-gradient(to bottom, #007bff, #0056b3); /* Gradient direction adjusted */
+    color: #fff;
+    width: 100%;
+    padding: 20px;
+    height: 80px;
+    background-position: center; /* Ensures the gradient is centered */
+}
+
+main {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: flex-start;
+    margin-bottom: 10px; /* Adjust this value as needed */
+}
+
+.feature {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    padding: 15px;
+    transition: transform 0.3s, box-shadow 0.3s;
+    flex: 1 1 180px;
+    min-width: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Ensure left alignment */
+    text-align: left; /* Ensure left alignment */
+}
+
+.feature p {
+    margin: 5px 0;
+    font-size: 1em;
+    color: #333;
+}
+
+.feature p strong {
+    font-weight: bold;
+}
+
+
+
+
+.feature:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.feature h3 {
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.feature select {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 0.8em;
+}
+
+.proceed-button {
+    display: block;
+    margin: 20px auto;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    text-align: center;
+}
+
+.proceed-button:hover {
+    background-color: #007bff;
+    transform: scale(1.05);
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+    font-size: 0.9em;
+}
+
+.go-back-button {
+    display: block;
+    margin: 20px auto;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    text-align: center;
+    
+}
+
+.button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.image-display-container {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    padding: 20px;
+}
+
+.image-row {
+    display: flex;
+    gap: 15px;
+}
+
+/* First row evenly spaced */
+.image-row.first-row {
+    justify-content: space-evenly;
+}
+
+/* Second row centered */
+.image-row.second-row {
+    justify-content: center;
+}
+
+/* Dynamic image size */
+.image-row img {
+    width: 30%; /* Make images fill 30% of the row width */
+    max-width: 400px; /* Cap image size to prevent excessive growth */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}

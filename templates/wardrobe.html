@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wardrobe Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&family=Open+Sans:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='wardrobe.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Wardrobe Assistant</h1>
+    </header>
+
+    <div class="upload-container">
+        <p>Upload your wardrobe pictures</p>
+        <form action="{{ url_for('wardrobe') }}" method="POST" enctype="multipart/form-data">
+            <input type="file" id="wardrobeFiles" name="wardrobeImages" accept="image/*" multiple>
+            <input type="submit" value="Upload" class="upload-button">
+        </form>
+    </div>
+
+    <div class="button-container">
+        <a href="{{ url_for('home') }}" class="button">Home</a>
+        <button class="button" onclick="generatePlan()">Generate Plan</button>
+        <button class="button" onclick="displayImages()">Display Images</button>
+    </div>
+
+    <!-- Loader -->
+    <div id="loader" class="loader" style="display: none;"></div>
+
+    <div id="imageDisplayContainer" class="image-display-container"></div>
+
+    <script>
+        // Generate wardrobe plan
+        function generatePlan() {
+            // Show the loader
+            document.getElementById('loader').style.display = 'block';
+
+            fetch('{{ url_for("generate_plan") }}')
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);
+                })
+                .catch(error => console.error('Error generating plan:', error))
+                .finally(() => {
+                    // Hide the loader after response
+                    document.getElementById('loader').style.display = 'none';
+                });
+        }
+
+        // Upload images and display confirmation
+        const form = document.querySelector('form');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+
+            fetch('{{ url_for("wardrobe") }}', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert(data.message);
+            })
+            .catch(error => console.error('Error uploading images:', error));
+        });
+
+        // Display images from the weekly_outfits directory in the desired layout
+        function displayImages() {
+            fetch('{{ url_for("get_weekly_outfits") }}')
+                .then(response => response.json())
+                .then(images => {
+                    const container = document.getElementById('imageDisplayContainer');
+                    container.innerHTML = ''; // Clear previous images
+
+                    const firstRowImages = images.slice(0, 3);
+                    const secondRowImages = images.slice(3, 5);
+
+                    const firstRow = document.createElement('div');
+                    firstRow.classList.add('image-row', 'first-row');
+                    firstRowImages.forEach(imgPath => {
+                        const img = document.createElement('img');
+                        img.src = imgPath;
+                        firstRow.appendChild(img);
+                    });
+                    container.appendChild(firstRow);
+
+                    const secondRow = document.createElement('div');
+                    secondRow.classList.add('image-row', 'second-row');
+                    secondRowImages.forEach(imgPath => {
+                        const img = document.createElement('img');
+                        img.src = imgPath;
+                        secondRow.appendChild(img);
+                    });
+                    container.appendChild(secondRow);
+                })
+                .catch(error => console.error('Error loading images:', error));
+        }
+    </script>
+</body>
+</html>
