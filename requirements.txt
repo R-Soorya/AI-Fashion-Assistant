@@ -1,0 +1,7 @@
+flask
+google-generativeai
+transformers
+pillow
+torch
+opencv-python
+scikit-learn
