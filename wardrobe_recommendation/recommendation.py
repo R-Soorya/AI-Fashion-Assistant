@@ -24,6 +24,9 @@ def recommend():
         }
     ]
     response = model.generate_content(refined_prompt)
+
+    print('Response:',response.text)
+
     cleaned_response = json_response(response)
 
     print('Json Response:\n',cleaned_response,'\n')
@@ -31,31 +34,28 @@ def recommend():
     pairs.save_outfit_images(cleaned_response, collections)
 
 def json_response(response):
-    # Remove the marker
-    formatted_string = response.text.splitlines()[1:-1]  # Skip the first line (marker)
-    cleaned_response = '\n'.join(formatted_string).strip()
-
-    # Wrap the content in curly braces to make it a valid JSON object
-    cleaned_response = '{' + cleaned_response + '}'
-
-    # Ensure the keys are properly formatted (removes extra quotes)
-    cleaned_response = cleaned_response.replace('""day', '"day')
-
-    # Remove trailing commas if present
-    cleaned_response = cleaned_response.replace(",}", "}")
-
-    print("Cleaned Response:\n", cleaned_response, '\n')
-
-    # Parse the cleaned_response string to a dictionary
     try:
-        # Assuming cleaned_response is a JSON string
-        api_response = json.loads(cleaned_response)
-    except json.JSONDecodeError as e:
-        print("Error decoding JSON:", e)
-        api_response = {}
-    
-    return api_response
+        # Navigate to the text part of the response
+        raw_text = response.text
 
+        # Remove the marker
+        cleaned_text = raw_text.replace("```json", "").replace("```", "").strip()
+
+        # Convert JSON string to a Python dictionary
+        cleaned_response = json.loads(cleaned_text)
+
+        print("\ncleaned response:",cleaned_response)
+        
+        return cleaned_response
+    except KeyError as e:
+        print("KeyError encountered while parsing response:", e)
+        return {}
+    except json.JSONDecodeError as e:
+        print("JSONDecodeError encountered:", e)
+        return {}
+    except Exception as e:
+        print("Unexpected error encountered:", e)
+        return {}
 # collections = {'top': [{'filename': 'shirt_1.jpg', 'color': 'Cloud Burst'}, {'filename': 'shirt_2.jpg', 'color': 'Gray Nurse'}, {'filename': 'shirt_3.jpg', 'color': 'Pigeon Post'}, {'filename': 'shirt_4.jpg', 'color': 'Van Cleef'}, {'filename': 'shirt_5.jpg', 'color': 'Desert Storm'}], 'bottom': [{'filename': 'trouser_1.jpg', 'color': 'Indian Khaki'}, {'filename': 'trouser_2.jpg', 'color': 'Dune'}, {'filename': 'trouser_3.jpg', 'color': 'Eerie Black'}]}
 
 

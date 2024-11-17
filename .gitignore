@@ -1,3 +1,7 @@
 wardrobe_recommendation/notebook/
 wardrobe_recommendation/classification_model/
+color
+test.ipynb
+test.py
+cleaned_color.csv
 .env

@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify, url_for
-from outfit_recommendation import recommendation_outfit
+from outfit_recommendation import recommendation_outfit, color_generator
 from wardrobe_recommendation import recommendation
 import os
 
@@ -44,6 +44,11 @@ def dress():
             for key, value in item.items():
                 capitalized_item[key.title()] = value.title()
             final_response.append(capitalized_item)
+
+        print('Final response:',final_response)
+
+        color_generator.generate_color_image(final_response)
+
 
         # Render the dress template with recommendations and passed form values
         return render_template('dress.html', final_response=final_response, 

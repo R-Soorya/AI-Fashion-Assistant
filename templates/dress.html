@@ -83,6 +83,18 @@
                 <div class="feature">
                     <p><strong>Top:</strong> {{ item.keys() | list | first }}</p>
                     <p><strong>Bottom:</strong> {{ item.values() | list | first }}</p>
+                    
+                    <!-- Displaying the images dynamically based on names -->
+                    <div class="image-display-container">
+                        <div class="image-row">
+                            <!-- Top image -->
+                            <img src="{{ url_for('static', filename='color/top/' + (item.keys() | list | first) + '.png') }}" 
+                                 alt="Top Color Image" class="outfit-image">
+                            <!-- Bottom image -->
+                            <img src="{{ url_for('static', filename='color/bottom/' + (item.values() | list | first) + '.png') }}" 
+                                 alt="Bottom Color Image" class="outfit-image">
+                        </div>
+                    </div>
                 </div>
             {% endfor %}
         </section>

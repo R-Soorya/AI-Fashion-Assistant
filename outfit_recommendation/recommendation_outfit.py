@@ -50,7 +50,5 @@ def generate_suggestions(preference):
 
     jsonresponse = json_response(response)
 
-    print('API response:',jsonresponse)
-
     return jsonresponse
 

@@ -5,3 +5,6 @@ pillow
 torch
 opencv-python
 scikit-learn
+matplotlib
+pandas
+sentence-transformers
