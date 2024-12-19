@@ -65,13 +65,13 @@ def wardrobe():
     if request.method == 'POST':
 
         # Ensure directories exist
-        os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+        os.makedirs(UPLOAD_FOLDER, exist_ok=True)   
 
         # Check if the form has the file part
         if 'wardrobeImages' not in request.files:
             return jsonify({"message": "No file part"}), 400
 
-        files = request.files.getlist('wardrobeImages')
+        files = request.files.getlist('wardrobeImages') 
         if not files:
             return jsonify({"message": "No files selected"}), 400
 

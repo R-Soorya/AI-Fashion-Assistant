@@ -3,7 +3,7 @@ from wardrobe_recommendation import classification, prompt, pairs
 import google.generativeai as genai
 import json
 
-genai.configure(api_key="AIzaSyDB9Xerpu6YhwejJsUVmZsUVmLV1RB8lsk")
+genai.configure(api_key="AIzaSyD-dGFRJp45jnTHXDzDXf6P46Bok7ZsoX0")
 model = genai.GenerativeModel("gemini-1.5-flash")
 
 def recommend():
