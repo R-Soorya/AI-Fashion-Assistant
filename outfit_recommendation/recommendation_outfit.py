@@ -43,8 +43,8 @@ def generate_suggestions(preference):
 
     
     # prompt_ = prompt.generate_prompt(preference)
-
-    print(preference)
+    print('----------------------------------------------------------------------------')
+    print('\nPreference :',preference)
 
     
     if preference['gender'] == 'men' and preference['dress_type'] == 'festival_wear':
@@ -67,9 +67,10 @@ def generate_suggestions(preference):
 
     response = model.generate_content(refined_prompt)
 
-    # print('\nResponse:',response.text)
-
     jsonresponse = json_response(response)
+
+    print('----------------------------------------------------------------------------')
+    print('\nResponse:',jsonresponse)
 
     return jsonresponse
 

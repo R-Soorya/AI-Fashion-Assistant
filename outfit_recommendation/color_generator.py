@@ -16,6 +16,7 @@ color_data['Embedding'] = color_data['Embedding'].apply(lambda x: np.array(ast.l
 
 # Find the closest matching color
 def get_closest_color(text_input):
+    text_input = ' '.join((text_input).split(' ')[:2])
     input_embedding = model.encode(text_input)
     similarities = color_data['Embedding'].apply(lambda x: util.cos_sim(input_embedding, x).item())
     best_match = color_data.iloc[similarities.idxmax()]
